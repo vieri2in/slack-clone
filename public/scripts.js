@@ -12,7 +12,8 @@ const clientOptions = {
     password,
   },
 };
-const socket = io("http://localhost:9000", clientOptions);
+// const socket = io("http://localhost:9000", clientOptions);
+const socket = io("/", clientOptions);
 const namespaceSockets = [];
 const listeners = {
   nsChange: [],
@@ -74,7 +75,7 @@ socket.on("nsList", (nsData) => {
     // if the connection has already been established, it will reconnect and remain its spot
     // let thisNs = namespaceSockets[ns.id];
     if (!namespaceSockets[ns.id]) {
-      namespaceSockets[ns.id] = io(`http://localhost:9000${ns.endpoint}`);
+      namespaceSockets[ns.id] = io(`${ns.endpoint}`);
     }
     addListeners(ns.id);
   });
